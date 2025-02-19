@@ -4,6 +4,16 @@ const router = express.Router();
 
 const PATH_ROUTES = __dirname;
 
-const a =fs.readdirSync(PATH_ROUTES)
-console.log({a})
+const removeExtension = (filename) => {
+    return filename.split('.').shift()
+}
+
+fs.readdirSync(PATH_ROUTES).filter((file) => {
+    const name = removeExtension(file)
+    if(name !== 'index'){
+        console.log(`Cargando ruta ${name}`)
+        router.use(`/${name}`, require(`./${file}`))
+    }
+})
+
 module.exports = router;
