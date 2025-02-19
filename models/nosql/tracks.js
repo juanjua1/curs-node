@@ -11,7 +11,7 @@ const TracksScheme = new mongoose.Schema(
         cover:{
             type: String,
             validate: {
-                calidator: (req) => {
+                validator: (req) => {
                     return true;
                 },
                 message: "ERROR_URL",
