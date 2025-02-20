@@ -22,7 +22,7 @@ const getItem = (req, res) => {};
  * @param {*} req
  * @param {*} res
  */
-const createItem = async (req, res) => {
+const createItem = async (req, res, next) => {
     const { body } = req
     console.log(body) 
     const date = await tracksModel.create(body)
