@@ -1,4 +1,6 @@
+const {marchedData} = require('express-validator');
 const  {tracksModel} = require('../models');
+const { handleHttpError } = require('../utils/handleErrror');
  
 /**
  * Obetener lista de la base de datos! 
@@ -6,8 +8,12 @@ const  {tracksModel} = require('../models');
  * @param {*} res
  */
 const getItems = async (req, res) => {
+  try{ 
     const data = tracksModel.find({});
     res.send({data})
+  }catch(e){
+    handleHttpError(res,"ERROR_GET_ITEMS");
+  }
 };
 
 /**
@@ -15,18 +21,27 @@ const getItems = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const getItem = (req, res) => {};
+const getItem = async (req, res) => {};
+  try{
+    
+  }catch(e){}
+
+
 
 /**
  * Insertar un registro 
  * @param {*} req
  * @param {*} res
  */
-const createItem = async (req, res, next) => {
-    const { body } = req
-    console.log(body) 
+const createItem = async (req, res) => {
+
+  try{ 
+    const body = marchedData(req);
     const date = await tracksModel.create(body)
-    res.send({algo:1}) 
+    res.send({ data }) 
+  }catch(e){
+    handleHttpError(res,"ERROR_CREATE_ITEM");
+  }
 };
 
 /**
@@ -34,14 +49,14 @@ const createItem = async (req, res, next) => {
  * @param {*} req
  * @param {*} res
  */
-const updateItem = (req, res) => {};
+const updateItem = async (req, res) => {};
 
 /**
  * Eliminar un registro 
  * @param {*} req
  * @param {*} res
  */
-const deleteItem = (req, res) => {};
+const deleteItem = async (req, res) => {};
 
 module.exports = {
   getItems,
