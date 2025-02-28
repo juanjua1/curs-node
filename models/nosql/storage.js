@@ -1,18 +1,20 @@
-const mongoose = require('mongoose')
-
-const StoreScheme = new mongoose.Schema(
-    {
-        url: {
-            type: String
-        },
-        filename:{
-            type: String
-        },
+const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
+const mongoosePaginateAggregate = require("mongoose-aggregate-paginate-v2");
+const StorageScheme = new mongoose.Schema(
+  {
+    url: {
+      type: String,
     },
-    {
-        timestamps: true, 
-        versionKey: false
-    }
+    filename: {
+      type: String,
+    },
+  },
+  {
+    versionKey: false,
+    timestamps: true,
+  }
 );
-
-module.exports = mongoose.model('storages', StoreScheme);
+StorageScheme.plugin(mongoosePaginate);
+StorageScheme.plugin(mongoosePaginateAggregate);
+module.exports = mongoose.model("storage", StorageScheme);
